@@ -233,8 +233,8 @@
                 weight = 1.5, 
                 smoothFactor = 0.1, #
                 fillOpacity = 1, #### the opacity (how see through) the shape is
-                fillColor = ~pal(day_num), ####### how to fill which zipcode by what information
-                popup = tx_popup)# %>% ######## allow pop ups to show up
+                fillColor = ~pal(day_num))#, ####### how to fill which zipcode by what information
+                #popup = tx_popup)# %>% ######## allow pop ups to show up
     # addLegend("bottomright", ####location of legend in leaflet app
     #           colors = c("#ffe4a8","#ffa45e","#eb7373","#bf3041"), #### legend colors to match zip code colors
     #           labels = c("0 - 24", "25 - 49", "50 - 74", "75 - 98"),#### Bin percentage ranges

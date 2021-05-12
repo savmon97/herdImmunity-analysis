@@ -7,15 +7,15 @@
 
   # Packages Necessary
   library(tidyverse)
-  library(stargazer)
+  #library(stargazer)
   library(rgdal)
   library(leaflet)
   library(readxl)
   library(janitor)
   library(lubridate)
-  library(tidycensus)
+  #library(tidycensus)
   library(ggthemes)
-  library(splines)
+  #library(splines)
   library(modelr)
   library(leaflet.providers)
   library(shiny)
@@ -238,7 +238,7 @@
     herd_table <- herd_table %>% 
       mutate(date = cellT) %>% 
       mutate(day_num = as.double(difftime(ymd(cellT),
-                                          ymd(Sys.Date()),
+                                          ymd(as.Date("2021-04-25")),
                                           units = 'days'))) %>% 
       mutate(day_num = if_else(day_num < 0, 0, day_num)) %>%
       mutate(day_num = na_if(day_num,0))
@@ -250,7 +250,7 @@
     
     #create palette to use
     pal <- colorNumeric(
-      palette = colorRampPalette(c('green','yellow', 'orange','red'), bias = 4)(length(counties_all)), 
+      palette = colorRampPalette(c('green','yellow', 'orange','red'), bias = 2.5)(length(counties_all)), 
       domain = herd_table$day_num)
     
     #fixing missing county
@@ -398,18 +398,28 @@
                                      tabPanel("Table",tableOutput("table")))))),
                           tabPanel("References",
                                    h1("References for figures"),
-                                   h3("• Billah, M. A., Miah, M. M., & Khan, M. N. (2020). 
+                                   h3("1. Billah, M. A., Miah, M. M., & Khan, M. N. (2020). 
                                    Reproductive number of coronavirus: A systematic review and 
                                       meta-analysis based on global level evidence. PloS one, 15(11), e0242128."),
-                                   h3("• DeMarco, C. (2020, July 17). COVID-19 herd immunity: 
+                                   h3("2.	Delamater, P. L., Street, E. J., Leslie, T. F., 
+                                      Yang, Y. T., & Jacobsen, K. H. (2019). Complexity of 
+                                      the basic reproduction number (R0). Emerging infectious 
+                                      diseases, 25(1), 1."),
+                                   h3("3. DeMarco, C. (2020, July 17). COVID-19 herd immunity: 
                                    7 questions, answered. Retrieved April 24, 2021, from 
                                    https://www.mdanderson.org/cancerwise/what-is-covid-19-coronavirus-herd-immunity-when-will-we-achieve-herd-immunity.h00-159383523.html"),
-                                   h3("• Ives, A. R., & Bozzuto, C. (2021). 
-                                      Estimating and explaining the spread of COVID-19 at 
-                                      the county level in the USA. Communications biology, 4(1), 1-9."),
-                                   h3("• https://www.aamc.org/news-insights/herd-immunity-closer-we-think"),
-                                   h3("• https://demographics.texas.gov/data/tpepp/estimates/"),
-                                   h3("• https://gis-txdot.opendata.arcgis.com/datasets/
+                                   h3("4.	Governor Abbott Lifts Mask Mandate, 
+                                      Opens Texas 100 Percent. (2021,). 
+                                      Retrieved from https://gov.texas.gov/news/post/
+                                      governor-abbott-lifts-mask-mandate-opens-texas-100-percent"),
+                                   h3("5.	John, T. J., & Samuel, R. (2000). 
+                                      Herd immunity and herd effect: new insights and 
+                                      definitions. European journal of epidemiology, 16(7), 601-606"),
+                                   h3("6.	Khubchandani, J., Sharma, S., Price, J. H., Wiblishauser, M. J., Sharma, M., & Webb, F. J. 
+                                      (2021). COVID-19 vaccination hesitancy in the United States: 
+                                      a rapid national assessment. Journal of Community Health, 46(2), 270-277."),
+                                   h3("7.	Saunders, W. B. (1994). Dorland's illustrated medical dictionary. The Curtis Center, Pennsylvania."),
+                                   h3("8. https://gis-txdot.opendata.arcgis.com/datasets/
                                       9b2eb7d232584572ad53bad41c76b04d_0/data?geometry=-133.426%2C24.483%2C-66.673%2C37.611")
                                    )
                           )
